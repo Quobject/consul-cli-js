@@ -19,32 +19,33 @@ var Consul = require('../lib/index.js');
 var path = require('path');
 var should = require('chai').should();
 var assert = require('chai').assert;
-
-
-var config = require('../my_config.json');
+var debug = require('debug')('Consul:test/index.js');
 
 
 describe('Consul', function () {
 
   it('should merge opts', function () {
-    var consul = new Consul({ a: 'a' });
-    assert.isNotNull(Consul);
-    assert.equal(Consul.a, 'a');
-    //console.log('Consul', Consul);
+
+    var consul = new Consul({ 'rpc-addr': '127.0.0.1:8400' });
+    assert.isNotNull(consul);
+    assert.equal(consul.rpc_addr, '127.0.0.1:8400');
+    debug('consul', Consul);
   });
 
 
   it('command ls should pass', function (done) {
-    var Consul = new Consul();
+    var consul = new Consul({
+      rpc_addr: '127.0.0.1:8400'
+    });
 
-    assert.isNotNull(Consul);
+    assert.isNotNull(consul);
     var failed = false;
     var err = null;
-    Consul.command('ls').then(function (data) {
-      console.log('data = ', data);
+    consul.command('members').then(function (data) {
+      debug('data', data);
       assert.isNotNull(data);
     }).finally(function () {
-      //console.log('finally ');
+      degub('finally');
       assert.isFalse(failed);
       assert.isNull(err);
       done();

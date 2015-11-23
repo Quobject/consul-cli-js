@@ -26,10 +26,11 @@ With promise
 
 ```js
 var consul = new Consul({
-  
+    rpc_addr: '127.0.0.1:8400'
 });
 
-consul.command('create machinename').then(function (data) {
+
+consul.command('members').then(function (data) {
   console.log('data = ', data); 
 });
 
@@ -41,7 +42,7 @@ With callback:
 
 ```js
 
-consul.command('create machinename', function (err, data) {
+consul.command('members', function (err, data) {
   console.log('data = ', data);
 });
 
