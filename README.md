@@ -26,7 +26,7 @@ With promise
 
 ```js
 var consul = new Consul({
-    rpc_addr: '127.0.0.1:8400'
+    'rpc-addr': '127.0.0.1:8400'
 });
 
 
