@@ -25,16 +25,39 @@ var Consul = require('consul-cli-js');
 With promise
 
 ```js
-var consul = new Consul({
-    'rpc-addr': '127.0.0.1:8400'
-});
+var consul = new Consul({ 'rpc-addr': '52.91.162.186:8400' });
 
 
 consul.command('members').then(function (data) {
   console.log('data = ', data); 
 });
 
-//
+//data =  { command: 'consul members -rpc-addr 52.91.162.186:8400  ',
+//  raw: '["Node     Address          Status  Type    Build  Protocol  DC\\nconsul1  10.0.0.90:8301   alive   server  0.5.2  2
+//      dc1\\nconsul2  10.0.0.99:8301   alive   server  0.5.2  2         dc1\\nconsul3  10.0.0.213:8301  alive   server  0.5.2  2
+//dc1\\n",""]',
+//members:
+//[ { node: 'consul1',
+//  address: '10.0.0.90:8301',
+//  status: 'alive',
+//  type: 'server',
+//  build: '0.5.2',
+//  protocol: '2',
+//  dc: 'dc1' },
+//  { node: 'consul2',
+//    address: '10.0.0.99:8301',
+//    status: 'alive',
+//    type: 'server',
+//    build: '0.5.2',
+//    protocol: '2',
+//    dc: 'dc1' },
+//  { node: 'consul3',
+//    address: '10.0.0.213:8301',
+//    status: 'alive',
+//    type: 'server',
+//    build: '0.5.2',
+//    protocol: '2',
+//    dc: 'dc1' } ] }
 
 ```
 
@@ -47,3 +70,17 @@ consul.command('members', function (err, data) {
 });
 
 ```
+
+* join
+
+consul.command('join', '54.86.97.135').then(function (data) {
+  console.log('data = ', data); 
+});
+
+//data = {
+//  command: 'consul join -rpc-addr 52.91.162.186:8400  54.86.97.135',
+//  raw: '["Successfully joined cluster by contacting 1 nodes.\\n",""]',
+//  line: 'Successfully joined cluster by contacting 1 nodes.',
+//  success: true
+//}
+
