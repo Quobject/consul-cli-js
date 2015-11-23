@@ -73,6 +73,7 @@ consul.command('members', function (err, data) {
 
 * join
 
+```js
 consul.command('join', '54.86.97.135').then(function (data) {
   console.log('data = ', data); 
 });
@@ -84,3 +85,4 @@ consul.command('join', '54.86.97.135').then(function (data) {
 //  success: true
 //}
 
+```

@@ -1,6 +1,6 @@
 {
   "name": "consul-cli-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A node.js wrapper for the consul CLI",
   "main": "lib/index.js",
   "scripts": {
