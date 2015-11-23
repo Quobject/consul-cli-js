@@ -57,7 +57,8 @@ consul.command('members').then(function (data) {
 //    type: 'server',
 //    build: '0.5.2',
 //    protocol: '2',
-//    dc: 'dc1' } ] }
+//    dc: 'dc1' } ],
+//  allMembersAlive: true }
 
 ```
 
