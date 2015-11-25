@@ -1,6 +1,6 @@
 {
   "name": "consul-cli-js",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "A node.js wrapper for the consul CLI",
   "main": "lib/index.js",
   "scripts": {
@@ -31,6 +31,7 @@
   "dependencies": {
     "lodash": "~3.10.1",
     "bluebird": "~2.10.1",
-    "debug": "~2.2.0"
+    "debug": "~2.2.0",
+    "cli-table-2-json": "~1.0.0"
   }
 }

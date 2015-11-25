@@ -33,22 +33,22 @@ describe('Consul', function () {
   //});
 
 
-  it('members', function (done) {
-    var consul = new Consul({ 'rpc-addr': '52.91.162.186:8400' });
+  //it('members', function (done) {
+  //  var consul = new Consul({ 'rpc-addr': '52.91.162.186:8400' });
 
-    assert.isNotNull(consul);
-    var failed = false;
-    var err = null;
-    consul.command('members').then(function (data) {
-      console.log('data = ', data);
-      //assert.isNotNull(data);
-    }).finally(function () {
-      debug('finally');
-      assert.isFalse(failed);
-      assert.isNull(err);
-      done();
-    });
-  });
+  //  assert.isNotNull(consul);
+  //  var failed = false;
+  //  var err = null;
+  //  consul.command('members').then(function (data) {
+  //    console.log('data = ', data);
+  //    //assert.isNotNull(data);
+  //  }).finally(function () {
+  //    debug('finally');
+  //    assert.isFalse(failed);
+  //    assert.isNull(err);
+  //    done();
+  //  });
+  //});
 
   //it('members callback', function (done) {
   //  var consul = new Consul({ 'rpc-addr': '52.91.162.186:8400' });
@@ -85,9 +85,27 @@ describe('Consul', function () {
   //  });
   //});
 
+  it('info', function (done) {
+    var consul = new Consul({ 'rpc-addr': '54.165.211.120:8400' });
 
+    assert.isNotNull(consul);
+    var failed = false;
+    var err = null;
+    consul.command('info').then(function (data) {
+      //debug('data', data);
+      console.log('data = ', data);
+      //assert.isNotNull(data);
+    }).finally(function () {
+      debug('finally');
+      assert.isFalse(failed);
+      assert.isNull(err);
+      done();
+    });
+  });
 
 
 });
+
+
 
 
