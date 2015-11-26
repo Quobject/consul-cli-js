@@ -96,7 +96,7 @@ consul.command('info').then(function (data) {
   console.log('data = ', data); 
 });
 
-data = {
+//data = {
 //  command: 'consul info -rpc-addr 54.165.211.120:8400  ',
 //  raw: '["WARNING: It is highly recommended to set GOMAXPROCS higher than 1\\n\\nagent:\\n\\tcheck_monitors = 0\\n\\tcheck_ttls = 0\\n\\tchecks = 0\\n\\tservices = 1\\nbuild:\\n\\tprerelease = \\n\\trevision = 9a9cc934\\n\\tversion = 0.5.2\\nconsul:\\n\\tbootstrap = true\\n\\tknown_datacenters = 1\\n\\tleader = true\\n\\tserver = true\\nraft:\\n\\tapplied_index = 192\\n\\tcommit_index = 192\\n\\tfsm_pending = 0\\n\\tlast_contact = never\\n\\tlast_log_index = 192\\n\\tlast_log_term = 1\\n\\tlast_snapshot_index = 0\\n\\tlast_snapshot_term = 0\\n\\tnum_peers = 0\\n\\tstate = Leader\\n\\tterm = 1\\nruntime:\\n\\tarch = amd64\\n\\tcpu_count = 1\\n\\tgoroutines = 54\\n\\tmax_procs = 1\\n\\tos = linux\\n\\tversion = go1.4.2\\nserf_lan:\\n\\tencrypted = false\\n\\tevent_queue = 1\\n\\tevent_time = 2\\n\\tfailed = 0\\n\\tintent_queue = 0\\n\\tleft = 0\\n\\tmember_time = 1\\n\\tmembers = 1\\n\\tquery_queue = 0\\n\\tquery_time = 1\\nserf_wan:\\n\\tencrypted = false\\n\\tevent_queue = 0\\n\\tevent_time = 1\\n\\tfailed = 0\\n\\tintent_queue = 0\\n\\tleft = 0\\n\\tmember_time = 1\\n\\tmembers = 1\\n\\tquery_queue = 0\\n\\tquery_time = 1\\n",""]',
 //  lines:
