@@ -17,7 +17,9 @@ The consul binary must be installed and accessible in the path [e.g. Installing 
 Then:
 
 ```js
-var Consul = require('consul-cli-js');
+var consulCli = require('consul-cli-js');
+var Options = consulCli.Options;
+var Consul = consulCli.Consul;
 ```
 
 ## Usage
@@ -25,17 +27,21 @@ var Consul = require('consul-cli-js');
 With promise
 
 ```js
-var consul = new Consul({ 'rpc-addr': '52.91.162.186:8400' });
+var options = new Options(
+  /* rpcAddr    */ '0.0.0.0:8400',
+  /* currentWorkingDirectory */ null
+);
 
+var consul = new Consul(options);
 
 consul.command('members').then(function (data) {
   console.log('data = ', data); 
 });
 
 //data =  { command: 'consul members -rpc-addr 52.91.162.186:8400  ',
-//  raw: '["Node     Address          Status  Type    Build  Protocol  DC\\nconsul1  10.0.0.90:8301   alive   server  0.5.2  2
+//  raw: 'Node     Address          Status  Type    Build  Protocol  DC\\nconsul1  10.0.0.90:8301   alive   server  0.5.2  2
 //      dc1\\nconsul2  10.0.0.99:8301   alive   server  0.5.2  2         dc1\\nconsul3  10.0.0.213:8301  alive   server  0.5.2  2
-//dc1\\n",""]',
+//dc1\\n',
 //members:
 //[ { node: 'consul1',
 //  address: '10.0.0.90:8301',
@@ -66,11 +72,35 @@ With callback:
 
 ```js
 
-consul.command('members', function (err, data) {
+consul.command('members', '', function (err, data) {
   console.log('data = ', data);
 });
 
 ```
+
+
+Typescript
+
+```js
+import { Consul, Options } from './index';
+
+const options = new Options(
+  /* rpcAddr */ '0.0.0.0:8400',
+  /* currentWorkingDirectory */ null
+);
+
+const consul = new Consul(options);
+
+return consul.command('info', '', function (err, data) {
+  console.log('data = ', data);
+});
+
+```
+
+
+
+
+
 
 * join
 
@@ -81,7 +111,7 @@ consul.command('join', '54.86.97.135').then(function (data) {
 
 //data = {
 //  command: 'consul join -rpc-addr 52.91.162.186:8400  54.86.97.135',
-//  raw: '["Successfully joined cluster by contacting 1 nodes.\\n",""]',
+//  raw: 'Successfully joined cluster by contacting 1 nodes.\\n',
 //  line: 'Successfully joined cluster by contacting 1 nodes.',
 //  success: true
 //}
@@ -98,7 +128,7 @@ consul.command('info').then(function (data) {
 
 //data = {
 //  command: 'consul info -rpc-addr 54.165.211.120:8400  ',
-//  raw: '["WARNING: It is highly recommended to set GOMAXPROCS higher than 1\\n\\nagent:\\n\\tcheck_monitors = 0\\n\\tcheck_ttls = 0\\n\\tchecks = 0\\n\\tservices = 1\\nbuild:\\n\\tprerelease = \\n\\trevision = 9a9cc934\\n\\tversion = 0.5.2\\nconsul:\\n\\tbootstrap = true\\n\\tknown_datacenters = 1\\n\\tleader = true\\n\\tserver = true\\nraft:\\n\\tapplied_index = 192\\n\\tcommit_index = 192\\n\\tfsm_pending = 0\\n\\tlast_contact = never\\n\\tlast_log_index = 192\\n\\tlast_log_term = 1\\n\\tlast_snapshot_index = 0\\n\\tlast_snapshot_term = 0\\n\\tnum_peers = 0\\n\\tstate = Leader\\n\\tterm = 1\\nruntime:\\n\\tarch = amd64\\n\\tcpu_count = 1\\n\\tgoroutines = 54\\n\\tmax_procs = 1\\n\\tos = linux\\n\\tversion = go1.4.2\\nserf_lan:\\n\\tencrypted = false\\n\\tevent_queue = 1\\n\\tevent_time = 2\\n\\tfailed = 0\\n\\tintent_queue = 0\\n\\tleft = 0\\n\\tmember_time = 1\\n\\tmembers = 1\\n\\tquery_queue = 0\\n\\tquery_time = 1\\nserf_wan:\\n\\tencrypted = false\\n\\tevent_queue = 0\\n\\tevent_time = 1\\n\\tfailed = 0\\n\\tintent_queue = 0\\n\\tleft = 0\\n\\tmember_time = 1\\n\\tmembers = 1\\n\\tquery_queue = 0\\n\\tquery_time = 1\\n",""]',
+//  raw: 'WARNING: It is highly recommended to set GOMAXPROCS higher than 1\\n\\nagent:\\n\\tcheck_monitors = 0\\n\\tcheck_ttls = 0\\n\\tchecks = 0\\n\\tservices = 1\\nbuild:\\n\\tprerelease = \\n\\trevision = 9a9cc934\\n\\tversion = 0.5.2\\nconsul:\\n\\tbootstrap = true\\n\\tknown_datacenters = 1\\n\\tleader = true\\n\\tserver = true\\nraft:\\n\\tapplied_index = 192\\n\\tcommit_index = 192\\n\\tfsm_pending = 0\\n\\tlast_contact = never\\n\\tlast_log_index = 192\\n\\tlast_log_term = 1\\n\\tlast_snapshot_index = 0\\n\\tlast_snapshot_term = 0\\n\\tnum_peers = 0\\n\\tstate = Leader\\n\\tterm = 1\\nruntime:\\n\\tarch = amd64\\n\\tcpu_count = 1\\n\\tgoroutines = 54\\n\\tmax_procs = 1\\n\\tos = linux\\n\\tversion = go1.4.2\\nserf_lan:\\n\\tencrypted = false\\n\\tevent_queue = 1\\n\\tevent_time = 2\\n\\tfailed = 0\\n\\tintent_queue = 0\\n\\tleft = 0\\n\\tmember_time = 1\\n\\tmembers = 1\\n\\tquery_queue = 0\\n\\tquery_time = 1\\nserf_wan:\\n\\tencrypted = false\\n\\tevent_queue = 0\\n\\tevent_time = 1\\n\\tfailed = 0\\n\\tintent_queue = 0\\n\\tleft = 0\\n\\tmember_time = 1\\n\\tmembers = 1\\n\\tquery_queue = 0\\n\\tquery_time = 1\\n',
 //  lines:
 //   ['WARNING: It is highly recommended to set GOMAXPROCS higher than 1',
 //     '',
