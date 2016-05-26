@@ -133,8 +133,9 @@ export class Consul {
       return new Promise(function (resolve, reject) {
         exec(execCommand, execOptions, (error, stdout, stderr) => {
           if (error) {
-            console.error(`exec error: ${error}`);
-            reject(error);
+            const message = `error: '${error}' stdout = '${stdout}' stderr = '${stderr}'`;
+            console.error(message);
+            reject(message);
           }
           //console.log(`stdout: ${stdout}`);
           resolve({ stdout: stdout });
@@ -170,7 +171,7 @@ export class Options implements IOptions {
       }
       const value = this[key];
       const key2 = _.snakeCase(key).replace('_', '-');
-      return `${previousValue} --${key2} ${value}`;
+      return `${previousValue} -${key2} ${value}`;
     }, '');
 
     return params;
