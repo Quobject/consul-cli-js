@@ -35,6 +35,7 @@ test('Consul', t => {
       //console.log('data = ', util.inspect(data, { depth: 10 }));
       t.ok(data);
       t.ok(data.info);
+      t.end();
     });
 
   });

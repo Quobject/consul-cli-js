@@ -1,11 +1,9 @@
 ﻿import * as _ from 'lodash';
-import * as Promise from 'bluebird';
+import nodeify from 'nodeify-ts';
 import * as child_process from 'child_process';
 import * as os from 'os';
 import { cliTable2Json } from 'cli-table-2-json';
 const exec = child_process.exec;
-
-
 
 const infoLines2Json = function (lines) {
   let result = {};
@@ -104,8 +102,6 @@ const extractResult = function (result) {
   return result;
 };
 
-
-
 export class Consul {
 
   constructor(private options: IOptions = new Options()) { }
@@ -115,7 +111,7 @@ export class Consul {
     const params = this.options.toParams();
     let execCommand = `consul ${command} ${params} ${commandEnd}`;
 
-    return Promise.resolve().then(function () {
+    const promise = Promise.resolve().then(function () {
       //console.log('execCommand =', execCommand);
 
       let execOptions = {
@@ -149,17 +145,17 @@ export class Consul {
       };
       return extractResult(result);
 
-    }).nodeify(callback);
+    });
+
+    return nodeify(promise, callback);
   }
 }
-
 
 export interface IOptions {
   rpcAddr?: string;
   currentWorkingDirectory?: string;
   toParams(): string;
 }
-
 
 export class Options implements IOptions {
   public constructor(public rpcAddr?: string, public currentWorkingDirectory?: string) { }
@@ -177,4 +173,3 @@ export class Options implements IOptions {
     return params;
   }
 }
-

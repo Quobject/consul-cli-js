@@ -4,6 +4,9 @@ A node.js wrapper for the [consul](https://www.consul.io/) command line tool
 [![NPM](https://nodei.co/npm/consul-cli-js.png?downloads=true&downloadRank=true)](https://nodei.co/npm/consul-cli-js/)
 [![NPM](https://nodei.co/npm-dl/consul-cli-js.png?months=6&height=3)](https://nodei.co/npm/consul-cli-js/)
 
+[![NPM version][npm-image]][npm-url]
+[![NPM downloads][downloads-image]][downloads-url]
+
 ## Installation
 
 ### Step 1: Prerequisites
@@ -252,3 +255,13 @@ consul.command('info').then(function (data) {
 //}
 
 ```
+
+## License
+
+MIT
+
+[npm-image]: https://img.shields.io/npm/v/consul-cli-js.svg?style=flat
+[npm-url]: https://npmjs.org/package/consul-cli-js
+[downloads-image]: https://img.shields.io/npm/dm/consul-cli-js.svg?style=flat
+[downloads-url]: https://npmjs.org/package/consul-cli-js
+
