@@ -85,7 +85,7 @@ consul.command('members', '', function (err, data) {
 Typescript
 
 ```js
-import { Consul, Options } from './index';
+import { Consul, Options } from 'consul-cli-js';
 
 const options = new Options(
   /* rpcAddr */ '0.0.0.0:8400',
