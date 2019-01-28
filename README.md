@@ -1,11 +1,6 @@
 # consul-cli-js
 A node.js wrapper for the [consul](https://www.consul.io/) command line tool
 
-[![NPM](https://nodei.co/npm/consul-cli-js.png?downloads=true&downloadRank=true)](https://nodei.co/npm/consul-cli-js/)
-[![NPM](https://nodei.co/npm-dl/consul-cli-js.png?months=6&height=3)](https://nodei.co/npm/consul-cli-js/)
-
-[![NPM version][npm-image]][npm-url]
-[![NPM downloads][downloads-image]][downloads-url]
 
 ## Installation
 
@@ -14,9 +9,9 @@ A node.js wrapper for the [consul](https://www.consul.io/) command line tool
 The consul binary must be installed and accessible in the path [e.g. Installing Consul](https://www.consul.io/intro/getting-started/install.html)
 
 ### Step 2: Installation
-    
+
     npm install consul-cli-js
-    
+
 Then:
 
 ```js
@@ -31,14 +26,14 @@ With promise
 
 ```js
 var options = new Options(
-  /* rpcAddr    */ '0.0.0.0:8400',
+  /* httpAddr    */ '0.0.0.0:8500',
   /* currentWorkingDirectory */ null
 );
 
 var consul = new Consul(options);
 
 consul.command('members').then(function (data) {
-  console.log('data = ', data); 
+  console.log('data = ', data);
 });
 
 //data =  { command: 'consul members -rpc-addr 52.91.162.186:8400  ',
@@ -88,7 +83,7 @@ Typescript
 import { Consul, Options } from 'consul-cli-js';
 
 const options = new Options(
-  /* rpcAddr */ '0.0.0.0:8400',
+  /* httpAddr */ '0.0.0.0:8500',
   /* currentWorkingDirectory */ null
 );
 
@@ -109,7 +104,7 @@ return consul.command('info', '', function (err, data) {
 
 ```js
 consul.command('join', '54.86.97.135').then(function (data) {
-  console.log('data = ', data); 
+  console.log('data = ', data);
 });
 
 //data = {
@@ -126,7 +121,7 @@ consul.command('join', '54.86.97.135').then(function (data) {
 
 ```js
 consul.command('info').then(function (data) {
-  console.log('data = ', data); 
+  console.log('data = ', data);
 });
 
 //data = {
@@ -259,9 +254,3 @@ consul.command('info').then(function (data) {
 ## License
 
 MIT
-
-[npm-image]: https://img.shields.io/npm/v/consul-cli-js.svg?style=flat
-[npm-url]: https://npmjs.org/package/consul-cli-js
-[downloads-image]: https://img.shields.io/npm/dm/consul-cli-js.svg?style=flat
-[downloads-url]: https://npmjs.org/package/consul-cli-js
-

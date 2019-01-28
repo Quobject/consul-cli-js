@@ -1,18 +1,21 @@
 {
   "name": "consul-cli-js",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A node.js wrapper for the consul CLI command",
-  "main": "dist/index.js",
-  "typings": "dist/index",
-  "files": [
-    "dist/"
-  ],
+  "license": "MIT",
+  "author": {
+    "name": "Matthias Ludwig",
+    "email": "mludwig@quobject.io"
+  },
+  "main": "./dist/main.js",
   "scripts": {
-    "lint": "tslint src/**/*.ts",
-    "build": "rimraf dist/ && tsc",
-    "test-spec": "ts-node node_modules/blue-tape/bin/blue-tape.js \"src/**/*.spec.ts\" | tap-diff",
-    "test": "npm run lint && npm run build && npm run test-spec",
-    "prepublish": "npm run lint && npm run build && rimraf dist/**/*.spec.* "
+    "clean": "npx del dist",
+    "lint": "npx tslint --project .",
+    "compile": "npx tsc",
+    "build": "npm run lint && npm run clean && npm run compile",
+    "test": "npm run build && npx jasmine",
+    "app": "npm run compile && node \"./dist/main.js\" ",
+    "crunch": "chokidar \"src/**/*.*\" -c \"npm run test\" --silent=true"
   },
   "repository": {
     "type": "git",
@@ -21,24 +24,25 @@
   "keywords": [
     "consul"
   ],
-  "author": "Matthias Ludwig <mludwig@quobject.io>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Quobject/consul-cli-js/issues"
-  },
-  "homepage": "https://github.com/Quobject/consul-cli-js",
   "devDependencies": {
-    "blue-tape": "^0.2.0",
-    "rimraf": "^2.5.2",
-    "tap-diff": "^0.1.1",
-    "ts-node": "^0.7.3",
-    "tslint": "^3.10.2",
-    "typescript": "^1.8.10"
+    "@types/jasmine": "3.3.8",
+    "@types/del": "^3.0.1",
+    "del-cli": "1.1.0",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "8.0.2",
+    "tslint": "5.12.1",
+    "typescript": "3.2.4",
+    "del": "^3.0.0",
+    "jasmine": "3.3.1",
+    "jasmine-reporters": "^2.3.2",
+    "jasmine-ts-console-reporter": "^3.1.1",
+    "boscode": "0.0.7",
+    "chokidar-cli": "^1.2.1",
+    "npx": "^10.2.0"
   },
   "dependencies": {
-    "cli-table-2-json": "^1.0.8",
-    "lodash": "^4.13.1",
-    "core-js": "^2.4.0",
-    "nodeify-ts": "^1.0.1"
+    "cli-table-2-json": "^1.0.11",
+    "lodash": "^4.17.11",
+    "nodeify-ts": "^1.0.6"
   }
 }

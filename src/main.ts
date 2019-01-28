@@ -1,17 +1,17 @@
-﻿import * as _ from 'lodash';
+import * as _ from 'lodash';
 import nodeify from 'nodeify-ts';
 import * as child_process from 'child_process';
 import * as os from 'os';
 import { cliTable2Json } from 'cli-table-2-json';
 const exec = child_process.exec;
 
-const infoLines2Json = function (lines) {
-  let result = {};
+const infoLines2Json = function(lines) {
+  const result = {};
 
   let header = false;
   let header2 = '';
 
-  lines.forEach(function (line) {
+  lines.forEach(function(line) {
 
     //debug(line);
     if (_.endsWith(line, ':')) {
@@ -42,17 +42,17 @@ const infoLines2Json = function (lines) {
 };
 
 
-const extractResult = function (result) {
+const extractResult = function(result) {
 
   const extracterArray = [
     {
       re: / members /,
-      run: function (resultp) {
+      run(resultp) {
         const lines = resultp.raw.split(os.EOL);
         resultp.members = cliTable2Json(lines);
         resultp.allMembersAlive = true;
 
-        resultp.members.forEach(function (member) {
+        resultp.members.forEach(function(member) {
           if (member.status !== 'alive') {
             resultp.allMembersAlive = false;
           }
@@ -63,7 +63,7 @@ const extractResult = function (result) {
     },
     {
       re: / join /,
-      run: function (resultp) {
+      run(resultp) {
         const line = resultp.raw.trim();
         resultp.line = line;
         resultp.success = _.startsWith(line, 'Successfully');
@@ -73,7 +73,7 @@ const extractResult = function (result) {
     },
     {
       re: / info /,
-      run: function (resultp) {
+      run(resultp) {
         const lines = resultp.raw.split(os.EOL);
         resultp.lines = lines;
         resultp.info = infoLines2Json(lines);
@@ -86,11 +86,12 @@ const extractResult = function (result) {
   ];
 
 
-  extracterArray.forEach(function (extracter) {
+  extracterArray.forEach(function(extracter) {
     const re = extracter.re;
     const str = result.command;
     let m;
 
+    // tslint:disable-next-line:no-conditional-assignment
     if ((m = re.exec(str)) !== null) {
       if (m.index === re.lastIndex) {
         re.lastIndex++;
@@ -107,14 +108,14 @@ export class Consul {
   constructor(private options: IOptions = new Options()) { }
 
   public command(command: string, commandEnd = '', callback?: (err, data) => void) {
-    let ansiblePlaybook = this;
+    const ansiblePlaybook = this;
     const params = this.options.toParams();
-    let execCommand = `consul ${command} ${params} ${commandEnd}`;
+    const execCommand = `consul ${command} ${params} ${commandEnd}`;
 
-    const promise = Promise.resolve().then(function () {
+    const promise = Promise.resolve().then(function() {
       //console.log('execCommand =', execCommand);
 
-      let execOptions = {
+      const execOptions = {
         cwd: ansiblePlaybook.options.currentWorkingDirectory,
         env: {
           DEBUG: '',
@@ -126,7 +127,7 @@ export class Consul {
 
       //console.log('exec options =', execOptions);
 
-      return new Promise(function (resolve, reject) {
+      return new Promise(function(resolve, reject) {
         exec(execCommand, execOptions, (error, stdout, stderr) => {
           if (error) {
             const message = `error: '${error}' stdout = '${stdout}' stderr = '${stderr}'`;
@@ -134,12 +135,12 @@ export class Consul {
             reject(message);
           }
           //console.log(`stdout: ${stdout}`);
-          resolve({ stdout: stdout });
+          resolve({ stdout });
         });
       });
-    }).then(function (data: { stdout: string }) {
+    }).then(function(data: { stdout: string }) {
 
-      let result = {
+      const result = {
         command: execCommand,
         raw: data.stdout,
       };
@@ -152,13 +153,13 @@ export class Consul {
 }
 
 export interface IOptions {
-  rpcAddr?: string;
+  httpAddr?: string;
   currentWorkingDirectory?: string;
   toParams(): string;
 }
 
 export class Options implements IOptions {
-  public constructor(public rpcAddr?: string, public currentWorkingDirectory?: string) { }
+  public constructor(public httpAddr?: string, public currentWorkingDirectory?: string) { }
 
   public toParams(): string {
     const params = Object.keys(this).reduce((previousValue, key) => {
@@ -173,3 +174,4 @@ export class Options implements IOptions {
     return params;
   }
 }
+
