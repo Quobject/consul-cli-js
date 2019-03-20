@@ -1,6 +1,6 @@
 {
   "name": "consul-cli-js",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A node.js wrapper for the consul CLI command",
   "license": "MIT",
   "author": {
@@ -25,24 +25,23 @@
     "consul"
   ],
   "devDependencies": {
-    "@types/jasmine": "3.3.8",
-    "@types/del": "^3.0.1",
+    "@types/del": "4.0.0",
+    "@types/jasmine": "3.3.12",
+    "chokidar-cli": "^1.2.2",
+    "del": "4.0.0",
     "del-cli": "1.1.0",
-    "npm-run-all": "^4.1.5",
-    "ts-node": "8.0.2",
-    "tslint": "5.12.1",
-    "typescript": "3.2.4",
-    "del": "^3.0.0",
     "jasmine": "3.3.1",
     "jasmine-reporters": "^2.3.2",
     "jasmine-ts-console-reporter": "^3.1.1",
-    "boscode": "0.0.7",
-    "chokidar-cli": "^1.2.1",
-    "npx": "^10.2.0"
+    "npm-run-all": "^4.1.5",
+    "npx": "^10.2.0",
+    "ts-node": "8.0.3",
+    "tslint": "5.14.0",
+    "typescript": "3.3.4000"
   },
   "dependencies": {
-    "cli-table-2-json": "^1.0.11",
-    "lodash": "^4.17.11",
+    "cli-table-2-json": "1.0.12",
+    "lodash": "4.17.11",
     "nodeify-ts": "^1.0.6"
   }
 }
